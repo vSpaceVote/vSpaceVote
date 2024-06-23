@@ -1,4 +1,4 @@
-// vSPACE-VSS-ElGamal.go
+// wget https://raw.githubusercontent.com/vSPACE-Vote/vSPACE/main/vSPACE-VSS-ElGamal.go
 /* ### Key Refactored Points:
 0. **Google Cloud Integration**: The code integrates with Google Cloud KMS and Storage for secure vote handling.
 1. **VSS Integration**: We use the DEDIS Kyber library to create and distribute VSS shares for each voter's vote.
@@ -226,4 +226,3 @@ func reconstructVote(shares []*share.PriShare, suite *edwards25519.SuiteEd25519)
 	}
 	return priPoly.Secret().(*big.Int)
 }
-// https://github.com/vSPACE-Vote/vSPACE/blob/main/vSPACE-VSS-ElGamal.go
