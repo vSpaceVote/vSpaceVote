@@ -4,7 +4,7 @@
 // It's designed to run in a Google Cloud Confidential Space environment,
 // by confidentially integrating with scalable Google Cloud KMS and Storage for 
 // handling encrypted votes and performing a privacy-preserving vote count.
-// https://github.com/vSpaceVote/vSpaceVote/blob/main/vSpaceVote-DID-TDW-Confidential-Workload-P2.go
+// https://github.com/vSpaceVote/vSpaceVote/blob/main/DID-TDW-Workload-v1.go
 // TODO: "Voter001_PROJECT_NUMBER"
 package main
 import (
@@ -336,4 +336,4 @@ func main() {
 // https://github.com/bcgov/trustdidweb/issues/6
 // https://raw.githubusercontent.com/mr-shifu/mpc-lib/master/protocols/cmp/cmp_test.go
 // https://gitlab.kingston.ac.uk/K1531112/verifiable-secret-sharing/blob/master/fvss.py
-// https://raw.githubusercontent.com/vSpaceVote/vSpaceVote/main/vSpaceVote-DID-TDW-Confidential-Workload-P2.go
+// https://raw.githubusercontent.com/vSpaceVote/vSpaceVote/main/DID-TDW-Workload-v1.go
