@@ -2,6 +2,7 @@
 // MPC-CMP protocol for threshold key generation and signing,
 // while using CRYSTALS-Kyber for post-quantum cryptography.
 // It's designed to run in a Google Cloud Confidential Space environment,
+// by confidentially integrating with scalable Google Cloud KMS and Storage for 
 // handling encrypted votes and performing a privacy-preserving vote count.
 // https://github.com/vSpaceVote/vSpaceVote/blob/main/DID-TDW-Workload-v1.go
 package main
