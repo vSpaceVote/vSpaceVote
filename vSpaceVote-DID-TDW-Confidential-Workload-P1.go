@@ -1,4 +1,8 @@
-// Partial listing of the workload code incorporating the DID:TDW generation, MPC-CMP protocol for threshold key generation and signing, while using CRYSTALS-Kyber for post-quantum cryptography. It's designed to run in a Google Cloud Confidential Space environment, handling encrypted votes and performing a secure, privacy-preserving vote count.
+// Partial listing of the workload code incorporating the DID:TDW generation,
+// MPC-CMP protocol for threshold key generation and signing,
+// while using CRYSTALS-Kyber for post-quantum cryptography.
+// It's designed to run in a Google Cloud Confidential Space environment,
+// handling encrypted votes and performing a privacy-preserving vote count.
 // https://github.com/vSpaceVote/vSpaceVote/blob/main/vSpaceVote-DID-TDW-Confidential-Workload-P1.go
 package main
 import (
