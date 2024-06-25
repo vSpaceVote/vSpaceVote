@@ -1,4 +1,4 @@
-// Partial listing of the workload code incorporating the DID:TDW generation.
+// Listing of the workload code incorporating the DID:TDW generation.
 // MPC-CMP protocol for threshold key generation and signing,
 // while using CRYSTALS-Kyber for post-quantum cryptography.
 // It's designed to run in a Google Cloud Confidential Space environment,
