@@ -51,26 +51,14 @@ const credentialConfig = `{
 }`
 func GenerateDID(domain string) (string, error) {
     pub, _, err := kyber.KeyGen768(rand.Reader)
-    if err != nil {
-        return "", err
-    }
     did := fmt.Sprintf("did:tdw:%s:%s", domain, SCID_PLACEHOLDER)
     return did, nil
 }
 func getVote(ctx context.Context, storageClient *storage.Client, v voter) (int, error) {
     encryptedBytes, err := getFile(ctx, storageClient, v.inputBucket, v.inputFile)
-    if err != nil {
-        return 0, err
-    }
     decryptedByte, err := decryptByte(ctx, v.keyName, v.sa, v.wipName, encryptedBytes)
-    if err != nil {
-        return 0, err
-    }
     decryptedNumber := strings.TrimSpace(string(decryptedByte))
     num, err := strconv.Atoi(decryptedNumber)
-    if err != nil {
-        return 0, err
-    }
     return num, nil
 }
 func decryptByte(ctx context.Context, keyName, trustedServiceAccountEmail, wippro string, encryptedData []byte) ([]byte, error) {
@@ -85,9 +73,6 @@ func main() {
     fmt.Println("Confidential vSPACE workload started")
     ctx := context.Background()
     storageClient, err := storage.NewClient(ctx)
-    if err != nil {
-        panic(err)
-    }
     msgstore := message.NewInMemoryMessageStore()
     bcststore := message.NewInMemoryMessageStore()
     keycfgstore := state.NewInMemoryKeyConfigStore()
@@ -107,32 +92,20 @@ func main() {
         ids[i] = party.ID(fmt.Sprintf("party-%d", i))
         voters[i].id = ids[i]
         voters[i].did, err = GenerateDID(voters[i].name)
-        if err != nil {
-            panic(err)
-        }
     }
     keycfg := config.NewKeyConfig(keyID, curve.Secp256k1{}, threshold, ids[0], ids)  
     handlers := make([]*protocol.Handler, len(voters))
     for i, v := range voters {
         h, err := protocol.NewMultiHandler(mpcInstance.Keygen(keycfg, nil), nil)
-        if err != nil {
-            panic(err)
-        }
         handlers[i] = h
     }
     for i := 0; i < 3; i++ {
         for j, h := range handlers {
             msg, err := h.Listen()
-            if err != nil {
-                panic(err)
-            }
             if msg != nil {
                 for k, oh := range handlers {
                     if j != k {
                         err = oh.Accept(msg)
-                        if err != nil {
-                            panic(err)
-                        }
                     }
                 }
             }
@@ -141,47 +114,29 @@ func main() {
     keyShares := make([]*big.Int, len(voters))
     for i, h := range handlers {
         r, err := h.Result()
-        if err != nil {
-            panic(err)
-        }
         c := r.(*cmp.Config)
         keyShares[i] = c.Share
     }
     votes := make([]*big.Int, len(voters))
     for i, v := range voters {
         vote, err := getVote(ctx, storageClient, v)
-        if err != nil {
-            panic(err)
-        }
         votes[i] = big.NewInt(int64(vote))
     }
     signedVotes := make([]*big.Int, len(votes))
     for i, vote := range votes {
         signConfig := config.NewSignConfig(keyID, vote)
         h, err := protocol.NewMultiHandler(mpcInstance.Sign(signConfig, nil), nil)
-        if err != nil {
-            panic(err)
-        }      
         for j := 0; j < 3; j++ {
             msg, err := h.Listen()
-            if err != nil {
-                panic(err)
-            }
             if msg != nil {
                 for k, oh := range handlers {
                     if i != k {
                         err = oh.Accept(msg)
-                        if err != nil {
-                            panic(err)
-                        }
                     }
                 }
             }
         }
         r, err := h.Result()
-        if err != nil {
-            panic(err)
-        }
         signature := r.(*cmp.Signature)
         signedVotes[i] = signature.R
     }
@@ -212,14 +167,6 @@ func main() {
     for _, v := range voters {
         outputWriter := storageClient.Bucket(v.outputBucket).Object(fmt.Sprintf("%s-%d", v.outputFile, now.Unix())).NewWriter(ctx)
         _, err = outputWriter.Write([]byte(result))
-        if err != nil {
-            fmt.Printf("Could not write: %v", err)
-            panic(err)
-        }
-        if err = outputWriter.Close(); err != nil {
-            fmt.Printf("Could not close: %v", err)
-            panic(err)
-        }
     }
 }
 // REF/Inspired by: 
