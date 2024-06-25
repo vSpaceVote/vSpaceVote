@@ -14,7 +14,7 @@ import (
     "math/big"
     "strings"
     "time"
-	"io/ioutil"
+    "io/ioutil"
     kms "cloud.google.com/go/kms/apiv1"
     "cloud.google.com/go/storage"
     "google.golang.org/api/option"
@@ -27,10 +27,10 @@ import (
     "github.com/mr-shifu/mpc-lib/pkg/mpc/message"
     "github.com/mr-shifu/mpc-lib/pkg/mpc/state"
     "github.com/cloudflare/circl/kem/kyber"
-	"go.dedis.ch/kyber/v3"
-	"go.dedis.ch/kyber/v3/group/edwards25519"
-	"go.dedis.ch/kyber/v3/share"
-	"go.dedis.ch/kyber/v3/share/vss/pedersen"
+    "go.dedis.ch/kyber/v3"
+    "go.dedis.ch/kyber/v3/group/edwards25519"
+    "go.dedis.ch/kyber/v3/share"
+    "go.dedis.ch/kyber/v3/share/vss/pedersen"
 )
 type collaborator struct {
     name         string
@@ -93,8 +93,8 @@ var collaborators = [2]collaborator{
     collaborator1EncryptedSalaryFileName,
     collaborator1BucketOutputName,
     collaborator1BucketOutputFileName,
-	// id
-	// did
+    // id
+    // did
   },
   {
     collaborator2Name,
@@ -105,13 +105,13 @@ var collaborators = [2]collaborator{
     collaborator2EncryptedSalaryFileName,
     collaborator2BucketOutputName,
     collaborator2BucketOutputFileName,
-	// id
-	// did
+    // id
+    // did
   },
 }
 /* var voters = []voter{
     {
-		name:         "Alex",
+	name:         "Alex",
         wipName:      "projects/ALEX_PROJECT_NUMBER/locations/global/workloadIdentityPools/ALEX_POOL_NAME/providers/attestation-verifier",
         sa:           "ALEX_SERVICE_ACCOUNT_NAME@ALEX_PROJECT_ID.iam.gserviceaccount.com",
         keyName:      "projects/ALEX_PROJECT_ID/locations/global/keyRings/ALEX_KEYRING_NAME/cryptoKeys/ALEX_KEY_NAME",
